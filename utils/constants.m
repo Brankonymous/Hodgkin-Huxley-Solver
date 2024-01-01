@@ -1,4 +1,4 @@
-function [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V] = constants()
+function [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants()
     Cm=0.01; % Membrane Capcitance uF/cm^2
     dt=0.04; % Time Step ms
     t=0:dt:25; %Time Array ms
@@ -13,4 +13,8 @@ function [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V] = constants()
     gbarl=0.003; % mS/cm^2 Leakage conductance
     
     V(1)=-60; % Initial Membrane voltage
+    m(1)=am(V(1))/(am(V(1))+bm(V(1))); % Initial m-value
+    n(1)=an(V(1))/(an(V(1))+bn(V(1))); % Initial n-value
+    h(1)=ah(V(1))/(ah(V(1))+bh(V(1))); % Initial h-value
+
 end

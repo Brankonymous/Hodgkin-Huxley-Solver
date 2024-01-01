@@ -1,9 +1,5 @@
 function forward_euler(plotFlag)
-    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V] = constants();
-    
-    m(1)=am(V(1))/(am(V(1))+bm(V(1))); % Initial m-value
-    n(1)=an(V(1))/(an(V(1))+bn(V(1))); % Initial n-value
-    h(1)=ah(V(1))/(ah(V(1))+bh(V(1))); % Initial h-value
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
     
     for i=1:length(t)-1
         m(i+1)=m(i)+dt*((am(V(i))*(1-m(i)))-(bm(V(i))*m(i)));
@@ -28,14 +24,23 @@ function forward_euler(plotFlag)
     FEh=h;
     clear V m n h;
     
-    if (plotFlag == true)
-        %% Plot
-        %Plot the functions
+    if plotFlag
+        figure;
         plot(t,FE);
         legend('Forward Euler');
         xlabel('Time (ms)');
         ylabel('Voltage (mV)');
         title('Voltage Change for Hodgkin-Huxley Model');
+
+        figure;
+        plot(t, FEn);
+        hold on;
+        plot(t, FEm);
+        plot(t, FEh);
+        title('Gating Variables');
+        xlabel('Time (ms)');
+        ylabel('Gating Variable');
+        legend('n','m','h');
     end
 
 end
