@@ -18,6 +18,8 @@ Run `forward_euler.m`, `ode_45.m`, `runge_kutta.m` or `comparison.m`. Make sure 
 ## Results
 ![voltage comparison](./results/comparison_voltage_change.jpg)
 ![gates comparison](./results/comparison_gating_variables.jpg)
+![phase portrait 30x30](./results/phase_portrait_30x30.jpg)
+![phase portrait 30x30](./results/phase_portrait_100x100.jpg)
 
 ## Work done by
 - Lea Kojičić
