@@ -1,4 +1,4 @@
-function runge_kutta(plotFlag)
+function [RKV, RKn, RKm, RKh] = runge_kutta(plotFlag)
     [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
     
     for i=1:length(t)-1
@@ -37,7 +37,7 @@ function runge_kutta(plotFlag)
     end
     
     %Store variables for graphing later
-    RK=V;
+    RKV=V;
     RKm=m;
     RKn=n;
     RKh=h;

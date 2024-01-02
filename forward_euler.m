@@ -1,4 +1,4 @@
-function forward_euler(plotFlag)
+function [FEV, FEn, FEm, FEh] = forward_euler(plotFlag)
     [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
     
     for i=1:length(t)-1
@@ -18,21 +18,21 @@ function forward_euler(plotFlag)
     end
     
     %Store variables for graphing later
-    FE=V;
+    FEV=V;
     FEm=m;
     FEn=n;
     FEh=h;
     clear V m n h;
     
     if plotFlag
-        figure;
+        figure(1);
         plot(t,FE);
         legend('Forward Euler');
         xlabel('Time (ms)');
         ylabel('Voltage (mV)');
         title('Voltage Change for Hodgkin-Huxley Model');
 
-        figure;
+        figure(2);
         plot(t, FEn);
         hold on;
         plot(t, FEm);

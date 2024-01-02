@@ -2,7 +2,7 @@ eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
 
-[~, ~, t, ~] = constants();
+[t, ~] = constants();
 
 if eulerFlag
     [FEV, FEn, FEm, FEh] = forward_euler(false);
@@ -35,10 +35,11 @@ if rungeFlag
     legendNames = [legendNames, 'Runge-Kutta'];
     hold on;
 end
+
 xlabel('Time (ms)');
 ylabel('Voltage (mV)');
 title('Voltage Change for Hodgkin-Huxley Model');
-legend(strcat('N=',string(legendNames(1:nN))));
+legend(legendNames);
 
 %{
 % Plot the gating variables
@@ -75,4 +76,3 @@ title('Gating Variables');
 xlabel('Time (ms)');
 ylabel('Gating Variable');
 legend(legendNames);
-%}

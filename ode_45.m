@@ -1,12 +1,12 @@
-function ode45(plotFlag)
-    constants();
+function [ODV, ODn, ODm, ODh] = ode_45(plotFlag)
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
 
     y0=[V;n;m;h];
     tspan = [0,max(t)];
 
     [t,V] = ode45(@HH,tspan,y0);
 
-    OD=V(:,1);
+    ODV=V(:,1);
     ODn=V(:,2);
     ODm=V(:,3);
     ODh=V(:,4);
