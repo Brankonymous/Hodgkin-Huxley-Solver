@@ -19,31 +19,30 @@ end
 % Plot the voltage
 figure(1);
 
-legendNames = [];
+legendNames = {};
 if eulerFlag
     plot(t, FEV);
-    legendNames = [legendNames, 'Forward Euler'];
+    legendNames = [legendNames, {'Forward Euler'}];
     hold on;
 end
 if ode45Flag
     plot(t, ODV);
-    legendNames = [legendNames, 'ODE45'];
+    legendNames = [legendNames, {'ODE45'}];
     hold on;
 end
 if rungeFlag
     plot(t, RKV);
-    legendNames = [legendNames, 'Runge-Kutta'];
+    legendNames = [legendNames, {'Runge-Kutta'}];
     hold on;
 end
 xlabel('Time (ms)');
 ylabel('Voltage (mV)');
 title('Voltage Change for Hodgkin-Huxley Model');
-legend(strcat('N=',string(legendNames(1:nN))));
+legend(legendNames);
 
-%{
 % Plot the gating variables
 figure(2);
-legendNames = [];
+legendNames = {};
 if eulerFlag
     plot(t, FEn);
     hold on;
@@ -51,7 +50,8 @@ if eulerFlag
     hold on;
     plot(t, FEh);
     hold on;
-    legendNames = [legendNames, 'Forward Euler n', 'Forward Euler m', 'Forward Euler h'];
+    legendNames = [legendNames, 
+        {'Forward Euler n', 'Forward Euler m', 'Forward Euler h'}];
 end
 if ode45Flag
     plot(t, ODn);
@@ -60,7 +60,8 @@ if ode45Flag
     hold on;
     plot(t, ODh);
     hold on;
-    legendNames = [legendNames, 'ODE45 n', 'ODE45 m', 'ODE45 h'];
+    legendNames = [legendNames, 
+        {'ODE45 n'}, {'ODE45 m'}, {'ODE45 h'}];
 end
 if rungeFlag
     plot(t, RKn);
@@ -69,10 +70,12 @@ if rungeFlag
     hold on;
     plot(t, RKh);
     hold on;
-    legendNames = [legendNames, 'Runge-Kutta n', 'Runge-Kutta m', 'Runge-Kutta h'];
+    legendNames = [legendNames, 
+        {'Runge-Kutta n'}, {'Runge-Kutta m'}, {'Runge-Kutta h'}];
 end
 title('Gating Variables');
 xlabel('Time (ms)');
 ylabel('Gating Variable');
+legendNames = [legendNames(:)];
 legend(legendNames);
-%}
+

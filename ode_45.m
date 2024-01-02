@@ -2,9 +2,8 @@ function [ODV, ODn, ODm, ODh] = ode_45(plotFlag)
     [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
 
     y0=[V;n;m;h];
-    tspan = [0,max(t)];
 
-    [t,V] = ode45(@HH,tspan,y0);
+    [t,V] = ode45(@HH,t,y0);
 
     ODV=V(:,1);
     ODn=V(:,2);
@@ -13,7 +12,7 @@ function [ODV, ODn, ODm, ODh] = ode_45(plotFlag)
 
     if plotFlag
         figure;
-        plot(t,OD);
+        plot(t,ODV);
         legend('ODE45');
         xlabel('Time (ms)');
         ylabel('Voltage (mV)');
