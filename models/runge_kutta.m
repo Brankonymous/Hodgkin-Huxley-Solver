@@ -1,4 +1,4 @@
-function [RKV, RKn, RKm, RKh] = runge_kutta(plotFlag, isExactSolution)
+function [RKV, RKn, RKm, RKh] = runge_kutta(isExactSolution, plotFlag)
     global HHisExactSolution;
     HHisExactSolution = isExactSolution;
 

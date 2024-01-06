@@ -1,4 +1,4 @@
-function [ODV, ODn, ODm, ODh] = ode_45(plotFlag, isExactSolution)
+function [ODV, ODn, ODm, ODh] = ode_45(isExactSolution, plotFlag)
     global HHisExactSolution;
     HHisExactSolution = isExactSolution;
     [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);

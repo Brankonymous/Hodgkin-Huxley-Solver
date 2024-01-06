@@ -1,5 +1,11 @@
-isExactSolution = true;
+%% Preprocess
+add_paths();
 
+isExactSolution = true;
+global HHisExactSolution;
+HHisExactSolution = isExactSolution;
+
+%% Calculate
 [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
 
 y0=[V;n;m;h];
@@ -11,6 +17,7 @@ ODn=V(:,2);
 ODm=V(:,3);
 ODh=V(:,4);
 
+%% Plot
 plotFlag = true;
 if plotFlag
     % Define the grid for the phase portrait

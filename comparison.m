@@ -1,22 +1,30 @@
 %% Preprocess
-isExactSolution = false;
+add_paths();
+
+isExactSolution = true;
 eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
+plotSpecificModel = false;
 
 [~, ~, t, ~] = constants(isExactSolution);
 
+
 %% Run
 if eulerFlag
-    [FEV, FEn, FEm, FEh] = forward_euler(false, isExactSolution);
+    [FEV, FEn, FEm, FEh] = forward_euler(isExactSolution, plotSpecificModel);
 end
 
 if ode45Flag
-    [ODV, ODn, ODm, ODh] = ode_45(false, isExactSolution);
+    [ODV, ODn, ODm, ODh] = ode_45(isExactSolution, plotSpecificModel);
 end
 
 if rungeFlag
-    [RKV, RKn, RKm, RKh] = runge_kutta(false, isExactSolution);
+    [RKV, RKn, RKm, RKh] = runge_kutta(isExactSolution, plotSpecificModel);
+end
+
+if isExactSolution
+    [ESV] = exact_solution(plotSpecificModel);
 end
 
 %% Voltage plot
@@ -37,6 +45,11 @@ end
 if rungeFlag
     plot(t, RKV);
     legendNames = [legendNames, {'Runge-Kutta'}];
+    hold on;
+end
+if isExactSolution
+    plot(t, ESV);
+    legendNames = [legendNames, {'Expected'}];
     hold on;
 end
 xlabel('Time (ms)');

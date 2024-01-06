@@ -1,4 +1,4 @@
-function [FEV, FEn, FEm, FEh] = forward_euler(plotFlag, isExactSolution)
+function [FEV, FEn, FEm, FEh] = forward_euler(isExactSolution, plotFlag)
     [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
     
     for i=1:length(t)-1
