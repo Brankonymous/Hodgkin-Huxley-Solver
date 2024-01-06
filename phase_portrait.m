@@ -1,5 +1,6 @@
+isExactSolution = true;
 
-[Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
+[Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
 
 y0=[V;n;m;h];
 

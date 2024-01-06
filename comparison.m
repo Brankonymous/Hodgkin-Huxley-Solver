@@ -1,21 +1,22 @@
 %% Preprocess
+isExactSolution = false;
 eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
 
-[~, ~, t, ~] = constants();
+[~, ~, t, ~] = constants(isExactSolution);
 
 %% Run
 if eulerFlag
-    [FEV, FEn, FEm, FEh] = forward_euler(false);
+    [FEV, FEn, FEm, FEh] = forward_euler(false, isExactSolution);
 end
 
 if ode45Flag
-    [ODV, ODn, ODm, ODh] = ode_45(false);
+    [ODV, ODn, ODm, ODh] = ode_45(false, isExactSolution);
 end
 
 if rungeFlag
-    [RKV, RKn, RKm, RKh] = runge_kutta(false);
+    [RKV, RKn, RKm, RKh] = runge_kutta(false, isExactSolution);
 end
 
 %% Voltage plot

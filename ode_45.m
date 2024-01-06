@@ -1,5 +1,7 @@
-function [ODV, ODn, ODm, ODh] = ode_45(plotFlag)
-    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
+function [ODV, ODn, ODm, ODh] = ode_45(plotFlag, isExactSolution)
+    global HHisExactSolution;
+    HHisExactSolution = isExactSolution;
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
 
     y0=[V;n;m;h];
 

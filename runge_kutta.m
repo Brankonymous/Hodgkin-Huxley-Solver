@@ -1,6 +1,9 @@
-function [RKV, RKn, RKm, RKh] = runge_kutta(plotFlag)
-    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
-    
+function [RKV, RKn, RKm, RKh] = runge_kutta(plotFlag, isExactSolution)
+    global HHisExactSolution;
+    HHisExactSolution = isExactSolution;
+
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
+
     for i=1:length(t)-1
         % obtain 4 variables (V,m,n,h) from HH function for each 4 k
 
@@ -45,7 +48,7 @@ function [RKV, RKn, RKm, RKh] = runge_kutta(plotFlag)
     
     if plotFlag
         figure;
-        plot(t,RK);
+        plot(t,RKV);
         legend('Runge-Kutta');
         xlabel('Time (ms)');
         ylabel('Voltage (mV)');

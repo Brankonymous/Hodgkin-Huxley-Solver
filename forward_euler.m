@@ -1,5 +1,5 @@
-function [FEV, FEn, FEm, FEh] = forward_euler(plotFlag)
-    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
+function [FEV, FEn, FEm, FEh] = forward_euler(plotFlag, isExactSolution)
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution);
     
     for i=1:length(t)-1
         m(i+1)=m(i)+dt*((am(V(i))*(1-m(i)))-(bm(V(i))*m(i)));
@@ -26,7 +26,7 @@ function [FEV, FEn, FEm, FEh] = forward_euler(plotFlag)
     
     if plotFlag
         figure(1);
-        plot(t,FE);
+        plot(t,FEV);
         legend('Forward Euler');
         xlabel('Time (ms)');
         ylabel('Voltage (mV)');

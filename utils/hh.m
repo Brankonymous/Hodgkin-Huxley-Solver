@@ -1,5 +1,6 @@
 function dydt = HH(~,y)
-    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants();
+    global HHisExactSolution;
+    [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(HHisExactSolution);
 
     V = y(1);
     n = y(2);
