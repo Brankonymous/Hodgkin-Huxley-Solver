@@ -1,7 +1,7 @@
 %% Preprocess
 add_paths();
 
-isExactSolution = false;
+isExactSolution = true;
 eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
@@ -32,26 +32,47 @@ end
 figure(1);
 
 legendNames = {};
-if eulerFlag
-    plot(t, FEV);
-    legendNames = [legendNames, {'Forward Euler'}];
-    hold on;
-end
-if ode45Flag
-    plot(t, ODV);
-    legendNames = [legendNames, {'ODE45'}];
-    hold on;
-end
-if rungeFlag
-    plot(t, RKV);
-    legendNames = [legendNames, {'Runge-Kutta'}];
-    hold on;
-end
 if isExactSolution
     plot(t, ESV);
     legendNames = [legendNames, {'Exact'}];
     hold on;
 end
+if eulerFlag
+    plot(t, FEV);
+    legendNames = [legendNames, {'Forward Euler'}];
+    hold on;
+
+    if isExactSolution
+        fprintf('[MAE] Euler error: %.10f\n', mean(abs(ESV - FEV)));
+        fprintf('[MSE] Euler error: %.10f\n', mean(abs(ESV - FEV).^2));
+        disp(' ');
+    end
+end
+if ode45Flag
+    plot(t, ODV);
+    legendNames = [legendNames, {'ODE45'}];
+    hold on;
+    
+    if isExactSolution
+        fprintf('[MAE] ODE45 error: %.10f\n', mean(abs(ESV - ODV)));
+        fprintf('[MSE] ODE45 error: %.10f\n', mean(abs(ESV - ODV).^2));
+        disp(' ');
+    end
+end
+if rungeFlag
+    plot(t, RKV);
+    legendNames = [legendNames, {'Runge-Kutta'}];
+    hold on;
+
+    if isExactSolution
+        fprintf('[MAE] Runge-Kutta error: %.10f\n', mean(abs(ESV - RKV)));
+        fprintf('[MSE] Runge-Kutta error: %.10f\n', mean(abs(ESV - RKV).^2));
+        disp(' ');
+    end
+end
+
+disp(' ');
+
 xlabel('Time (ms)');
 ylabel('Voltage (mV)');
 title('Voltage Change for Hodgkin-Huxley Model');
@@ -101,15 +122,15 @@ end
 %% Find biggest differences in Voltage
 
 % Initialize variables
-largestDiff = -inf;
+largestDiffVoltage = -inf;
 arraysDiff = [-1, -1];
 index = 0;
 
 if eulerFlag && ode45Flag
     for i = 1:length(FEV)
         diff = abs(FEV(i) - ODV(i));
-        if diff > largestDiff
-            largestDiff = diff;
+        if diff > largestDiffVoltage
+            largestDiffVoltage = diff;
             arraysDiff = 'Euler / ODE45';
             index = i;
         end
@@ -119,8 +140,8 @@ end
 if eulerFlag && rungeFlag
     for i = 1:length(FEV)
         diff = abs(FEV(i) - RKV(i));
-        if diff > largestDiff
-            largestDiff = diff;
+        if diff > largestDiffVoltage
+            largestDiffVoltage = diff;
             arraysDiff = 'Euler / Runge-Kutta';
             index = i;
         end
@@ -130,16 +151,19 @@ end
 if ode45Flag && rungeFlag
     for i = 1:length(ODV)
         diff = abs(ODV(i) - RKV(i));
-        if diff > largestDiff
-            largestDiff = diff;
+        if diff > largestDiffVoltage
+            largestDiffVoltage = diff;
             arraysDiff = 'ODE45 / Runge-Kutta';
             index = i;
         end
     end
 end
 
-disp('Biggest Voltage Difference (in ms and mV): ');
-timeWithLargestDifference = t(index)
-largestDiff
+disp('Biggest Voltage Difference in every ODE model');
+largestDiffTime = t(index);
+
+fprintf('Largest voltage difference: %.2fmV\n', largestDiffVoltage);
+fprintf('Caused by models: %s\n', arraysDiff);
+fprintf('Time when that difference occured: %.2fms\n', largestDiffTime);
 
 clear

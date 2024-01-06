@@ -7,10 +7,10 @@ function [ODV, ODn, ODm, ODh] = ode_45(isExactSolution, plotFlag)
 
     [t,V] = ode45(@HH,t,y0);
 
-    ODV=V(:,1);
-    ODn=V(:,2);
-    ODm=V(:,3);
-    ODh=V(:,4);
+    ODV=V(:,1)';
+    ODn=V(:,2)';
+    ODm=V(:,3)';
+    ODh=V(:,4)';
 
     if plotFlag
         figure;
