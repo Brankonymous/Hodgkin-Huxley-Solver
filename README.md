@@ -2,12 +2,11 @@
 Comparing ODE models for simulating Hodgkin Huxley Model in MATLAB
 
 ## Formulas
-Based on Hodgkin-Huxley model, certain formulas are given:
-
+The Hodgink-Huxley model describes action potential given the following dynamical system:  
 ![equations](./formulas/equations.png)
 ![constants](./formulas/constants.png)
 
-<b>Exact solution</b> can be simulated by setting 2 gating variables to 0. We set `gbarNa` and `gbarK` to <b>0</b> for that purpose when running ODE comparison. Exact model can be calculated using this formula: 
+The <b>exact solution</b> is achieved only for voltage-independet variables, i.e. leak gates. Thus, we set sodium and potassium conductances (`gbarNa` and `gbarK`) to <b>0</b> when running ODE comparison. The exact solution is then calculated by solving a first order linear ODE:
 ![exact formula](./formulas/exact_solution.png)
 
 
