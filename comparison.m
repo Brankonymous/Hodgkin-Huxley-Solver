@@ -1,7 +1,7 @@
 %% Preprocess
 add_paths();
 
-isExactSolution = true;
+isExactSolution = false;
 eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
