@@ -1,7 +1,7 @@
 %% Preprocess
 add_paths();
 
-isExactSolution = true;
+isExactSolution = false;
 eulerFlag = true;
 ode45Flag = true;
 rungeFlag = true;
@@ -49,7 +49,7 @@ if rungeFlag
 end
 if isExactSolution
     plot(t, ESV);
-    legendNames = [legendNames, {'Expected'}];
+    legendNames = [legendNames, {'Exact'}];
     hold on;
 end
 xlabel('Time (ms)');
@@ -58,44 +58,45 @@ title('Voltage Change for Hodgkin-Huxley Model');
 legend(legendNames);
 
 %% Gating variables plot
-figure(2);
-legendNames = {};
-if eulerFlag
-    plot(t, FEn);
-    hold on;
-    plot(t, FEm);
-    hold on;
-    plot(t, FEh);
-    hold on;
-    legendNames = [legendNames, 
-        {'Forward Euler n', 'Forward Euler m', 'Forward Euler h'}];
+if isExactSolution == false
+    figure(2);
+    legendNames = {};
+    if eulerFlag
+        plot(t, FEn);
+        hold on;
+        plot(t, FEm);
+        hold on;
+        plot(t, FEh);
+        hold on;
+        legendNames = [legendNames, 
+            {'Forward Euler n', 'Forward Euler m', 'Forward Euler h'}];
+    end
+    if ode45Flag
+        plot(t, ODn);
+        hold on;
+        plot(t, ODm);
+        hold on;
+        plot(t, ODh);
+        hold on;
+        legendNames = [legendNames, 
+            {'ODE45 n'}, {'ODE45 m'}, {'ODE45 h'}];
+    end
+    if rungeFlag
+        plot(t, RKn);
+        hold on;
+        plot(t, RKm);
+        hold on;
+        plot(t, RKh);
+        hold on;
+        legendNames = [legendNames, 
+            {'Runge-Kutta n'}, {'Runge-Kutta m'}, {'Runge-Kutta h'}];
+    end
+    title('Gating Variables');
+    xlabel('Time (ms)');
+    ylabel('Gating Variable');
+    legendNames = [legendNames(:)];
+    legend(legendNames);
 end
-if ode45Flag
-    plot(t, ODn);
-    hold on;
-    plot(t, ODm);
-    hold on;
-    plot(t, ODh);
-    hold on;
-    legendNames = [legendNames, 
-        {'ODE45 n'}, {'ODE45 m'}, {'ODE45 h'}];
-end
-if rungeFlag
-    plot(t, RKn);
-    hold on;
-    plot(t, RKm);
-    hold on;
-    plot(t, RKh);
-    hold on;
-    legendNames = [legendNames, 
-        {'Runge-Kutta n'}, {'Runge-Kutta m'}, {'Runge-Kutta h'}];
-end
-title('Gating Variables');
-xlabel('Time (ms)');
-ylabel('Gating Variable');
-legendNames = [legendNames(:)];
-legend(legendNames);
-
 
 %% Find biggest differences in Voltage
 

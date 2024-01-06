@@ -1,7 +1,7 @@
 %% Preprocess
 add_paths();
 
-isExactSolution = true;
+isExactSolution = false;
 global HHisExactSolution;
 HHisExactSolution = isExactSolution;
 
