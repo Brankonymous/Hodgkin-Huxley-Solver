@@ -1,7 +1,7 @@
 function [Cm, dt, t, I, ENa, EK, El, gbarNa, gbarK, gbarl, V, m, n, h] = constants(isExactSolution)
     Cm=0.01; % Membrane Capcitance uF/cm^2
     dt=0.04; % Time Step ms
-    t=0:dt:25; %Time Array ms
+    t=0:dt:25; % Time Array ms
     
     I=0.1; % External Current Applied
     
